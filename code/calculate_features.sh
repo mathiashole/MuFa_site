@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # =============================
-# Script para calcular longitud y GC con infoseq
-# Uso: ./calculate_features.sh genome file1.fasta file2.fasta ...
+# Script to calculate length and GC with infoseq
+# Usage: ./calculate_features.sh genome file1.fasta file2.fasta ...
 # =============================
 
 TYPE=$1         # "genome" o "gene"

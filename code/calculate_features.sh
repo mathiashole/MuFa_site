@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# =============================
+# Script para calcular longitud y GC con infoseq
+# Uso: ./calculate_features.sh genome file1.fasta file2.fasta ...
+# =============================
+
+TYPE=$1         # "genome" o "gene"
+shift           # Remueve el primer argumento y deja solo los fasta
+FILES=("$@")    # Todos los archivos FASTA
+
+# Verifica si hay archivos
+if [ ${#FILES[@]} -eq 0 ]; then
+    echo "No FASTA files provided. Usage: $0 genome file1.fasta file2.fasta ..."
+    exit 1
+fi
+
+# Archivo de salida
+OUTPUT="features.tsv"
+echo -e "file\tID\tLength\tGC_Content" > "$OUTPUT"
+
+# Procesar cada archivo
+for fasta in "${FILES[@]}"; do
+    if [ ! -f "$fasta" ]; then
+        echo "File not found: $fasta" >&2
+        continue
+    fi
+
+    base=$(basename "$fasta")
+
+    # Extraer el nombre base
+    if [ "$TYPE" == "genome" ]; then
+        extracted=$(echo "$base" | sed -E 's/.*_([^_]+)_Genome.fasta/\1/')
+    elif [ "$TYPE" == "gene" ]; then
+        extracted=$(echo "$base" | sed -E 's/.*_([^_]+)\.fasta/\1/')
+    else
+        echo "Invalid type: $TYPE (use 'genome' or 'gene')" >&2
+        exit 1
+    fi
+
+    # Ejecutar infoseq
+    #infoseq -only -name -length -pgc "$fasta" | while read line; do
+    infoseq -only -name -length -pgc "$fasta" | tail -n +2 | while read -r line; do
+
+        ID=$(echo "$line" | awk '{print $1}')
+        LENGTH=$(echo "$line" | awk '{print $2}')
+        #GC_RAW=$(echo "$line" | awk '{print $3}')
+        GC_RAW=$(echo "$line" | awk '{print $3}' | tr -d '%')
+
+        # Calcular GC en decimal (dividir por 100 y redondear a 3 decimales)
+        #GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
+        GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
+
+        # Limpiar ID
+        ID=$(echo "$ID" | sed 's/=/_/g' | sed 's/[:;].*//g' | tr -d ' ')
+
+        echo -e "${extracted}\t${ID}\t${LENGTH}\t${GC}"
+    done >> "$OUTPUT"
+done

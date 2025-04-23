@@ -34,12 +34,6 @@ if [[ -z "$TYPE" || -z "$OUTPUT" || ${#FILES[@]} -eq 0 ]]; then
     exit 1
 fi
 
-# Verifica si hay archivos
-if [ ${#FILES[@]} -eq 0 ]; then
-    echo "No FASTA files provided. Usage: $0 genome file1.fasta file2.fasta ..."
-    exit 1
-fi
-
 # Archivo de salida
 OUTPUT="features.tsv"
 echo -e "file\tID\tLength\tGC_Content" > "$OUTPUT"

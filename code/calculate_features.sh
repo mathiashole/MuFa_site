@@ -5,9 +5,10 @@
 # Usage: ./calculate_features.sh genome file1.fasta file2.fasta ...
 # =============================
 
-TYPE=$1         # "genome" o "gene"
-shift           # Remueve el primer argumento y deja solo los fasta
-FILES=("$@")    # Todos los archivos FASTA
+# Global variabls
+TYPE=""
+OUTPUT=""
+FILES=()
 
 # Verifica si hay archivos
 if [ ${#FILES[@]} -eq 0 ]; then

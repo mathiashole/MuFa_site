@@ -10,6 +10,24 @@ TYPE=""
 OUTPUT=""
 FILES=()
 
+# Parse arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -type) TYPE="$2"; shift ;;
+        -out) OUTPUT="$2"; shift ;;
+        -fasta) shift; while [[ "$#" -gt 0 && "$1" != -* ]]; do FILES+=("$1"); shift; done ;;
+        -h|--help)
+            echo "Uso: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
+            exit 0
+            ;;
+        *)
+            echo "Parámetro desconocido: $1" >&2
+            exit 1 ;;
+    esac
+    shift
+done
+
+
 # Verifica si hay archivos
 if [ ${#FILES[@]} -eq 0 ]; then
     echo "No FASTA files provided. Usage: $0 genome file1.fasta file2.fasta ..."

@@ -4,3 +4,5 @@
 *.qmd
 *.txt
 *.yml
+
+/.quarto/

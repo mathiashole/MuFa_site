@@ -1,8 +1,8 @@
 *.tsv
 *.csv
-*.png
 *.qmd
 *.txt
 *.yml
+/image
 
 /.quarto/

@@ -3,6 +3,8 @@
 *.qmd
 *.txt
 *.yml
+*.cif
 /image
+/structure_file
 
 /.quarto/

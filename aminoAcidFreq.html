@@ -180,8 +180,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#qu%C3%A9-descubrimos" id="toc-qué-descubrimos" class="nav-link active" data-scroll-target="#qu%C3%A9-descubrimos"><span class="header-section-number">4.1</span> 🔍 ¿Qué descubrimos?</a></li>
-  <li><a href="#amino-acid-frequency-of-coding-frequency" id="toc-amino-acid-frequency-of-coding-frequency" class="nav-link" data-scroll-target="#amino-acid-frequency-of-coding-frequency"><span class="header-section-number">4.2</span> Amino acid frequency of coding frequency</a></li>
+<li><a href="#an%C3%A1lisis-de-la-composici%C3%B3n-de-amino%C3%A1cidos" id="toc-análisis-de-la-composición-de-aminoácidos" class="nav-link active" data-scroll-target="#an%C3%A1lisis-de-la-composici%C3%B3n-de-amino%C3%A1cidos"><span class="header-section-number">4.1</span> 🧬 Análisis de la composición de aminoácidos</a></li>
+  <li><a href="#comparaci%C3%B3n-de-perfiles-de-amino%C3%A1cidos" id="toc-comparación-de-perfiles-de-aminoácidos" class="nav-link" data-scroll-target="#comparaci%C3%B3n-de-perfiles-de-amino%C3%A1cidos"><span class="header-section-number">4.2</span> 📊 Comparación de perfiles de aminoácidos</a></li>
+  <li><a href="#diferencia-estadistica-entre-la-frequencya-de-aminoacidos" id="toc-diferencia-estadistica-entre-la-frequencya-de-aminoacidos" class="nav-link" data-scroll-target="#diferencia-estadistica-entre-la-frequencya-de-aminoacidos"><span class="header-section-number">4.3</span> Diferencia estadistica entre la frequencya de aminoacidos</a></li>
+  <li><a href="#agrupaci%C3%B3n-de-amino%C3%A1cidos-por-propiedades-qu%C3%ADmicas" id="toc-agrupación-de-aminoácidos-por-propiedades-químicas" class="nav-link" data-scroll-target="#agrupaci%C3%B3n-de-amino%C3%A1cidos-por-propiedades-qu%C3%ADmicas"><span class="header-section-number">4.4</span> ✨ Agrupación de aminoácidos por propiedades químicas</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -209,9 +211,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p><img src="https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif" class="img-fluid" style="float:right;" alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"></p>
-<section id="qué-descubrimos" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="qué-descubrimos">
-<span class="header-section-number">4.1</span> 🔍 ¿Qué descubrimos?</h2>
-<p>En este análisis entendermos los patrones ocultos en la composición de aminoácidos de proteínas codificantes de Trypanosoma cruzi, comparando:</p>
+<section id="análisis-de-la-composición-de-aminoácidos" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="análisis-de-la-composición-de-aminoácidos">
+<span class="header-section-number">4.1</span> 🧬 Análisis de la composición de aminoácidos</h2>
+<p>Los aminoácidos son los componentes fundamentales de las proteínas, y su composición puede ofrecer información valiosa sobre las propiedades funcionales, estructurales y evolutivas de las secuencias codificantes. 🔍 En este análisis se comparan dos grupos de secuencias:</p>
+<p>🧪 Secuencias DGF-1: proteínas pertenecientes a la familia multigénica DGF-1 de Trypanosoma cruzi. Esta familia se ha asociado con procesos de interacción parásito-hospedador y presenta una alta variabilidad, por lo que resulta de especial interés biológico.</p>
+<p>🧬 Proteínas codificantes del genoma: conjunto de proteínas anotadas como codificantes en los genomas de referencia, usadas como contexto comparativo.</p>
+<p>A partir de ambas fuentes, se calcularon las frecuencias relativas de cada aminoácido en cada proteína. Luego, estas frecuencias fueron transformadas a porcentajes para facilitar la comparación, y se calcularon estadísticas resumen (media y desviación estándar) por grupo.</p>
+<p>El objetivo es evaluar si las proteínas DGF-1 presentan un perfil distintivo en su composición de aminoácidos, lo que podría revelar rasgos funcionales particulares o pistas sobre su historia evolutiva. 🌐</p>
 <div class="cell">
 <style type="text/css">
 p {
@@ -288,124 +294,87 @@ p {
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># library(readr)</span></span>
-<span></span>
-<span><span class="co"># combined_freqs_coding_prot &lt;- read_tsv(</span></span>
-<span><span class="co">#   "amino_acid_frequency_all_protein_coding.tsv",</span></span>
-<span><span class="co">#   na = c("", "NA"),     # Strings a tratar como NA</span></span>
-<span><span class="co">#   skip_empty_rows = TRUE</span></span>
-<span><span class="co"># )</span></span>
-<span><span class="va">combined_freqs_coding_prot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"amino_acid_frequency_all_protein_coding.tsv"</span><span class="op">)</span></span>
-<span><span class="va">combined_freqs_coding_prot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">combined_freqs_coding_prot</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">cols_num</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span> </span>
-<span><span class="va">combined_freqs_coding_prot</span><span class="op">[</span><span class="va">cols_num</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">combined_freqs_coding_prot</span><span class="op">[</span><span class="va">cols_num</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
+<span><span class="co"># === 1. Leer y preparar los datos de proteínas codificantes ===</span></span>
+<span><span class="va">combined_freqs_coding_prot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"amino_acid_frequency_all_protein_coding.tsv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">combined_freqs_coding_prot</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">combined_freqs_coding_prot</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">combined_freqs_coding_prot</span><span class="op">$</span><span class="va">File</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">".*_([A-Za-z0-9]+)_translated\\.fasta"</span>, <span class="st">"\\1"</span>, <span class="va">combined_freqs_coding_prot</span><span class="op">$</span><span class="va">File</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">long_freqs_coding_prot</span> <span class="op">&lt;-</span> <span class="va">combined_freqs_coding_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span><span class="op">)</span>,  <span class="co"># Especifica las columnas de aminoácidos</span></span>
-<span>               names_to <span class="op">=</span> <span class="st">"AminoAcid"</span>,  <span class="co"># Nombre de la nueva columna para los nombres de los aminoácidos</span></span>
-<span>               values_to <span class="op">=</span> <span class="st">"Freq"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># Nombre de la nueva columna para las frecuencias</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Freq <span class="op">=</span> <span class="va">Freq</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span>  <span class="co"># Convertir frecuencias a porcentaje</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, names_to <span class="op">=</span> <span class="st">"AminoAcid"</span>, values_to <span class="op">=</span> <span class="st">"Freq"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Freq <span class="op">=</span> <span class="va">Freq</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">summary_data_coding_prot</span> <span class="op">&lt;-</span> <span class="va">long_freqs_coding_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">File</span>, <span class="va">AminoAcid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>    mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>, sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Procesar todos los archivos target</span></span>
-<span><span class="va">all_frequencies_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"aminoacid_frequency_re_anotacion.tsv"</span><span class="op">)</span></span>
-<span><span class="va">all_frequencies_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">all_frequencies_target</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">amino_acids_one_letter</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span> </span>
-<span><span class="va">all_frequencies_target</span><span class="op">[</span><span class="va">amino_acids_one_letter</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">all_frequencies_target</span><span class="op">[</span><span class="va">amino_acids_one_letter</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
+<span><span class="va">summary_data_coding_prot</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="st">"Other"</span></span>
 <span></span>
-<span><span class="co"># Extraer nombre del archivo</span></span>
-<span><span class="va">all_frequencies_target</span><span class="op">$</span><span class="va">File</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">".*_([A-Za-z0-9]+)_translated\\.fasta"</span>, </span>
-<span>                                    <span class="st">"\\1"</span>, </span>
-<span>                                    <span class="va">all_frequencies_target</span><span class="op">$</span><span class="va">File</span><span class="op">)</span></span>
+<span><span class="co"># === 2. Leer y preparar los datos de secuencias objetivo ===</span></span>
+<span><span class="va">all_frequencies_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"aminoacid_frequency_re_anotacion.tsv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">all_frequencies_target</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">all_frequencies_target</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Reorganizar en formato largo</span></span>
+<span><span class="va">all_frequencies_target</span><span class="op">$</span><span class="va">File</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">".*_([A-Za-z0-9]+)_Genome\\.fasta"</span>, <span class="st">"\\1"</span>, <span class="va">all_frequencies_target</span><span class="op">$</span><span class="va">File</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">long_freqs_target</span> <span class="op">&lt;-</span> <span class="va">all_frequencies_target</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">amino_acids_one_letter</span><span class="op">)</span>, </span>
-<span>               names_to <span class="op">=</span> <span class="st">"AminoAcid"</span>, </span>
-<span>               values_to <span class="op">=</span> <span class="st">"Freq"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Freq <span class="op">=</span> <span class="va">Freq</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span>  <span class="co"># Solo si originalmente está entre 0 y 1</span></span>
-<span>  </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, names_to <span class="op">=</span> <span class="st">"AminoAcid"</span>, values_to <span class="op">=</span> <span class="st">"Freq"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Freq <span class="op">=</span> <span class="va">Freq</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">summary_data_target</span> <span class="op">&lt;-</span> <span class="va">long_freqs_target</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">File</span>, <span class="va">AminoAcid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>    mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>, sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Asumimos que key_name ya está definido previamente</span></span>
+<span><span class="va">summary_data_target</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="va">key_name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="amino-acid-frequency-of-coding-frequency" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="amino-acid-frequency-of-coding-frequency">
-<span class="header-section-number">4.2</span> Amino acid frequency of coding frequency</h2>
+</section><section id="comparación-de-perfiles-de-aminoácidos" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="comparación-de-perfiles-de-aminoácidos">
+<span class="header-section-number">4.2</span> 📊 Comparación de perfiles de aminoácidos</h2>
+<p>Se construyeron gráficos de barras que muestran la frecuencia media (%) de cada aminoácido, junto con su desviación estándar (SD), diferenciando ambos grupos por color. 🟠🔵</p>
+<p>Cada gráfico representa una comparación individual entre una proteína DGF-1 y el conjunto de proteínas codificantes, permitiendo observar patrones particulares o desviaciones notables en la abundancia relativa de ciertos residuos. 💡</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_barplot_contrast</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">plot_title</span>, <span class="va">y_label</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">dodge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>  <span class="co"># Define dodge for bar alignment</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># === 3. Unir los datos de ambas fuentes ===</span></span>
+<span><span class="va">combined_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">summary_data_target</span>, <span class="va">summary_data_coding_prot</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Etiquetas de aminoácidos</span></span>
+<span><span class="va">amino_acids_one_letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"R"</span>, <span class="st">"N"</span>, <span class="st">"D"</span>, <span class="st">"C"</span>, <span class="st">"Q"</span>, <span class="st">"E"</span>, <span class="st">"G"</span>, <span class="st">"H"</span>, <span class="st">"I"</span>, </span>
+<span>                            <span class="st">"L"</span>, <span class="st">"K"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"W"</span>, <span class="st">"Y"</span>, <span class="st">"V"</span><span class="op">)</span></span>
+<span><span class="va">amino_acids_three_letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ala"</span>, <span class="st">"Arg"</span>, <span class="st">"Asn"</span>, <span class="st">"Asp"</span>, <span class="st">"Cys"</span>, <span class="st">"Gln"</span>, <span class="st">"Glu"</span>, <span class="st">"Gly"</span>, </span>
+<span>                              <span class="st">"His"</span>, <span class="st">"Ile"</span>, <span class="st">"Leu"</span>, <span class="st">"Lys"</span>, <span class="st">"Met"</span>, <span class="st">"Phe"</span>, <span class="st">"Pro"</span>, </span>
+<span>                              <span class="st">"Ser"</span>, <span class="st">"Thr"</span>, <span class="st">"Trp"</span>, <span class="st">"Tyr"</span>, <span class="st">"Val"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">combined_data</span><span class="op">$</span><span class="va">AminoAcid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>  <span class="va">combined_data</span><span class="op">$</span><span class="va">AminoAcid</span>,</span>
+<span>  levels <span class="op">=</span> <span class="va">amino_acids_one_letter</span>,</span>
+<span>  labels <span class="op">=</span> <span class="va">amino_acids_three_letter</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># === 4. Función para graficar ===</span></span>
+<span><span class="va">plot_barplot_contrast</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">plot_title</span>, <span class="va">y_label</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">dodge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">AminoAcid</span>, y <span class="op">=</span> <span class="va">mean_freq</span>, fill <span class="op">=</span> <span class="va">supp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span></span>
-<span>      stat <span class="op">=</span> <span class="st">"identity"</span>, </span>
-<span>      alpha <span class="op">=</span> <span class="fl">0.7</span>, </span>
-<span>      width <span class="op">=</span> <span class="fl">0.5</span>, </span>
-<span>      position <span class="op">=</span> <span class="va">dodge</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="va">y_label</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="va">plot_title</span>,  </span>
-<span>      caption <span class="op">=</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, width <span class="op">=</span> <span class="fl">0.5</span>, position <span class="op">=</span> <span class="va">dodge</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">-</span> <span class="va">sd_freq</span>, ymax <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">+</span> <span class="va">sd_freq</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>                  position <span class="op">=</span> <span class="va">dodge</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="va">y_label</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">plot_title</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>      axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>      axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Definir el nombre que se usará como etiqueta para los datos target</span></span>
-<span><span class="va">key_name</span> <span class="op">&lt;-</span> <span class="st">"Target"</span>  <span class="co"># Puedes cambiarlo si deseas</span></span>
+<span><span class="co"># === 5. Graficar por cada File ===</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">file_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">summary_data_target</span><span class="op">$</span><span class="va">File</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="va">combined_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">File</span> <span class="op">==</span> <span class="va">file_name</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Añadir la columna 'supp' correctamente, asegurando que coincida con las filas</span></span>
-<span><span class="va">summary_data_target</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="va">key_name</span></span>
-<span><span class="va">summary_data_coding_prot</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="st">"Other"</span></span>
-<span></span>
-<span><span class="co"># Combinar ambos datasets</span></span>
-<span><span class="va">target_coding_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">summary_data_target</span>, <span class="va">summary_data_coding_prot</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Mapear las letras de los aminoácidos a abreviaciones de tres letras</span></span>
-<span><span class="va">amino_acids_one_letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"R"</span>, <span class="st">"N"</span>, <span class="st">"D"</span>, <span class="st">"C"</span>, <span class="st">"Q"</span>, <span class="st">"E"</span>, <span class="st">"G"</span>, <span class="st">"H"</span>, <span class="st">"I"</span>, </span>
-<span>                            <span class="st">"L"</span>, <span class="st">"K"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"W"</span>, <span class="st">"Y"</span>, <span class="st">"V"</span><span class="op">)</span></span>
-<span><span class="va">amino_acids_three_letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Ala"</span>, <span class="st">"Arg"</span>, <span class="st">"Asn"</span>, <span class="st">"Asp"</span>, <span class="st">"Cys"</span>, </span>
-<span>  <span class="st">"Gln"</span>, <span class="st">"Glu"</span>, <span class="st">"Gly"</span>, <span class="st">"His"</span>, <span class="st">"Ile"</span>, </span>
-<span>  <span class="st">"Leu"</span>, <span class="st">"Lys"</span>, <span class="st">"Met"</span>, <span class="st">"Phe"</span>, <span class="st">"Pro"</span>, </span>
-<span>  <span class="st">"Ser"</span>, <span class="st">"Thr"</span>, <span class="st">"Trp"</span>, <span class="st">"Tyr"</span>, <span class="st">"Val"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Asegurar que los factores estén en orden correcto con sus etiquetas</span></span>
-<span><span class="va">target_coding_seq</span><span class="op">$</span><span class="va">AminoAcid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
-<span>  <span class="va">target_coding_seq</span><span class="op">$</span><span class="va">AminoAcid</span>,</span>
-<span>  levels <span class="op">=</span> <span class="va">amino_acids_one_letter</span>,</span>
-<span>  labels <span class="op">=</span> <span class="va">amino_acids_three_letter</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Crear el gráfico por cada archivo</span></span>
-<span><span class="va">unique_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">summary_data_target</span><span class="op">$</span><span class="va">File</span><span class="op">)</span>  <span class="co"># o usa target_coding_seq$File si quieres iterar sobre todos</span></span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">file_name</span> <span class="kw">in</span> <span class="va">unique_files</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">target_coding_seq</span>, <span class="va">File</span> <span class="op">==</span> <span class="va">file_name</span> <span class="op">|</span> <span class="va">supp</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">)</span></span>
-<span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">plot_barplot_contrast</span><span class="op">(</span></span>
-<span>    <span class="va">data_subset</span>, </span>
-<span>    plot_title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Amino acid frequency -"</span>, <span class="va">file_name</span><span class="op">)</span>, </span>
+<span>    <span class="va">data_subset</span>,</span>
+<span>    plot_title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Amino acid frequency -"</span>, <span class="va">file_name</span><span class="op">)</span>,</span>
 <span>    y_label <span class="op">=</span> <span class="st">"Amino acid content (%)"</span></span>
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,309 +403,227 @@ p {
 </div>
 </div>
 </div>
+</section><section id="diferencia-estadistica-entre-la-frequencya-de-aminoacidos" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="diferencia-estadistica-entre-la-frequencya-de-aminoacidos">
+<span class="header-section-number">4.3</span> Diferencia estadistica entre la frequencya de aminoacidos</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/table classification amino acids-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">classification_aminoacids</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">genome_col</span> <span class="op">=</span> <span class="st">"File"</span>, <span class="va">id_col</span> <span class="op">=</span> <span class="st">"Sequence_ID"</span>, <span class="va">type</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">result_combained_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>      <span class="st">"Genome"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span> <span class="va">genome_col</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>      <span class="st">"id"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span> <span class="va">id_col</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>      <span class="st">"Aliphatic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"A"</span>, <span class="st">"V"</span>, <span class="st">"L"</span>, <span class="st">"I"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"Aromatic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"W"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"Sulphur"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"Basic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"R"</span>, <span class="st">"H"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"Acidic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"Q"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"AliphaticHydroxyl"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"T"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"tRNAsynthetaseClassI"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"E"</span>, <span class="st">"Q"</span>, <span class="st">"R"</span>, <span class="st">"C"</span>, <span class="st">"M"</span>, <span class="st">"V"</span>, <span class="st">"I"</span>, <span class="st">"L"</span>, <span class="st">"Y"</span>, <span class="st">"W"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      <span class="st">"tRNAsynthetaseClassII"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"A"</span>, <span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"H"</span>, <span class="st">"D"</span>, <span class="st">"N"</span>, <span class="st">"K"</span>, <span class="st">"F"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="op">}</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">classfied_amino_acids_targt</span> <span class="op">&lt;-</span> <span class="fu">classification_aminoacids</span><span class="op">(</span><span class="va">all_frequencies_target</span><span class="op">)</span></span>
-<span><span class="va">classfied_amino_acids_coding_prot</span> <span class="op">&lt;-</span> <span class="fu">classification_aminoacids</span><span class="op">(</span><span class="va">combined_freqs_coding_prot</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># Prueba de normalidad (K-S)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">long_freqs_coding_prot</span>, <span class="va">AminoAcid</span> <span class="op">==</span> <span class="st">"L"</span><span class="op">)</span><span class="op">$</span><span class="va">Freq</span>, <span class="st">"pnorm"</span><span class="op">)</span> <span class="co"># rechazo H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>Warning in ks.test.default(subset(long_freqs_coding_prot, AminoAcid ==
+"L")$Freq, : ties should not be present for the Kolmogorov-Smirnov test</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  subset(long_freqs_coding_prot, AminoAcid == "L")$Freq
+D = 0.98841, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">long_freqs_target</span>, <span class="va">AminoAcid</span> <span class="op">==</span> <span class="st">"L"</span><span class="op">)</span><span class="op">$</span><span class="va">Freq</span>, <span class="st">"pnorm"</span><span class="op">)</span> <span class="co"># Rechazo H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>Warning in ks.test.default(subset(long_freqs_target, AminoAcid == "L")$Freq, :
+ties should not be present for the Kolmogorov-Smirnov test</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  subset(long_freqs_target, AminoAcid == "L")$Freq
+D = 1, p-value &lt; 2.2e-16
+alternative hypothesis: two-sided</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># más de ~30 muestras por grupo, el t-test es bastante robusto</span></span>
+<span></span>
+<span><span class="va">av_all_prot</span> <span class="op">&lt;-</span> <span class="va">long_freqs_coding_prot</span></span>
+<span><span class="va">av_target</span> <span class="op">&lt;-</span> <span class="va">long_freqs_target</span></span>
+<span><span class="va">av_all_prot</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="st">"Other"</span></span>
+<span><span class="va">av_target</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="va">key_name</span></span>
+<span></span>
+<span><span class="va">combined_long_freqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">av_target</span>, <span class="va">av_all_prot</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Comparación por t-test para cada aminoácido</span></span>
+<span><span class="va">diff_aminoacids</span> <span class="op">&lt;-</span> <span class="va">combined_long_freqs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">AminoAcid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    t_test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">supp</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    tidy_res <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">t_test</span>, <span class="fu">broom</span><span class="fu">::</span><span class="va"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">tidy_res</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">AminoAcid</span>, <span class="va">estimate1</span>, <span class="va">estimate2</span>, <span class="va">p.value</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># p &lt; 0.05 por defecto, podés ajustar si usás FDR</span></span>
+<span><span class="va">sig_diff</span> <span class="op">&lt;-</span> <span class="va">diff_aminoacids</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">p.value</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mayores_en_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">sig_diff</span>, <span class="va">estimate1</span> <span class="op">&gt;</span> <span class="va">estimate2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calcular diferencia (puede ser absoluta o simple)</span></span>
+<span><span class="va">mayores_en_target</span><span class="op">$</span><span class="va">difference</span> <span class="op">&lt;-</span> <span class="va">mayores_en_target</span><span class="op">$</span><span class="va">estimate1</span> <span class="op">-</span> <span class="va">mayores_en_target</span><span class="op">$</span><span class="va">estimate2</span></span>
+<span></span>
+<span><span class="co"># Ordenar por mayor diferencia</span></span>
+<span><span class="va">mayores_en_target_ordenado</span> <span class="op">&lt;-</span> <span class="va">mayores_en_target</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">mayores_en_target</span><span class="op">$</span><span class="va">difference</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># mayores_significativos &lt;- subset(mayores_en_target_ordenado, p.value &lt; 0.05)</span></span>
+<span></span>
+<span><span class="co"># mayores_significativos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<!-- ::: {.panel-tabset .nav-pills}
+</section><section id="agrupación-de-aminoácidos-por-propiedades-químicas" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="agrupación-de-aminoácidos-por-propiedades-químicas">
+<span class="header-section-number">4.4</span> ✨ Agrupación de aminoácidos por propiedades químicas</h2>
+<p>Para complementar el análisis individual de los aminoácidos, realizamos una agrupación basada en sus propiedades químicas ⚗️. Esta clasificación permite observar patrones más amplios en la composición de las proteínas, agrupando los aminoácidos según características como su carga, polaridad, hidrofobicidad o presencia de anillos aromáticos 🔬.</p>
+<p>En este caso, agrupamos los aminoácidos en las siguientes categorías:</p>
+<pre><code>🧪 Alifáticos: Gly, Ala, Val, Leu, Ile
 
-## Frequency of amino acid groups of the coding sequences.
+🌸 Aromáticos: Phe, Trp, Tyr
 
+🌱 Con azufre: Cys, Met
 
+⚡ Básicos (carga positiva): Lys, Arg, His
 
-::: {.cell}
+🍋 Ácidos (carga negativa o derivados): Asp, Glu, Asn, Gln
 
-```{.r .cell-code}
-plot_violin_group <- function(data, plot_title, y_label) {
-  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
-    geom_violin(alpha = 0.7, width = 0.5) + 
-    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA) +
-    scale_fill_brewer(palette = "Dark2") + 
-    ylab(y_label) + 
-    labs(
-      title = plot_title, 
-      caption = "Data source: Facultad de Ciencias, Udelar"
-    ) +
-    theme_minimal() + 
-    theme(
-      axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1)#,
-#      legend.position = "none"
-    )
-}
+💧 Polares sin carga: Ser, Thr, Asn, Gln, Tyr
 
+🧷 Alifáticos hidroxilados: Ser, Thr
 
-long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
-  pivot_longer(
-    cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
-    names_to = "AminoAcidGroup",
-    values_to = "Freq"
-  )
+🧲 Cargados positivamente: Lys, Arg, His
 
-# Function plot_violin_group call
-# plot_violin_group(
-#   data = long_data_coding_prot, 
-#   plot_title = "Frequency of grouped amino acids", 
-#   y_label = "Amino acid content"
-# )
+🧪 Cargados negativamente: Asp, Glu
 
-unique_files <- unique(long_data_coding_prot$Genome)
+☀️ Hidrofóbicos: Ala, Val, Ile, Leu, Met, Phe, Trp, Gly, Pro, Cys
 
-for (file_name in unique_files) {
-  data_subset <- filter(long_data_coding_prot, Genome == file_name)
-  
-  print(plot_violin_group(
-    data_subset, 
-    plot_title = paste("Frequency of grouped amino acids -", file_name), 
-    y_label = "Amino acid content"
-  ))
-  
-  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-}
-```
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids groups of the coding sequence-1.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids groups of the coding sequence-2.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids groups of the coding sequence-3.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids groups of the coding sequence-4.png){width=672}
-:::
-:::
-
-
-
-## Frequency of amino acid groups of Target
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-long_data_target <- classfied_amino_acids_targt %>%
-  pivot_longer(
-    cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
-    names_to = "AminoAcidGroup",
-    values_to = "Freq"
-  )
-
-# Function plot_violin_group call
-# plot_violin_group(
-#   data = long_data_coding_prot, 
-#   plot_title = "Frequency of grouped amino acids", 
-#   y_label = "Amino acid content"
-# )
-
-unique_files <- unique(long_data_target$Genome)
-
-for (file_name in unique_files) {
-  data_subset <- filter(long_data_target, Genome == file_name)
-  
-  print(plot_violin_group(
-    data_subset, 
-    plot_title = paste("Frequency of grouped amino acids -", file_name), 
-    y_label = "Amino acid content"
-  ))
-  
-  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-}
-```
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids group of target-1.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids group of target-2.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids group of target-3.png){width=672}
-:::
-
-::: {.cell-output-display}
-![](aminoAcidFreq_files/figure-html/plot amino acids group of target-4.png){width=672}
-:::
-:::
-
-
-
-::: -->
+💦 Hidrofílicos: Arg, Asn, Asp, Gln, Glu, Lys, Ser, Thr, Tyr, His</code></pre>
+<p>Esto nos permite comparar, por ejemplo, si la proteína <code>DGF-1</code> presenta una preferencia por residuos hidrofóbicos o cargados, en relación con el conjunto general de proteínas codificantes del genoma de Trypanosoma cruzi 🧬.</p>
+<p>A continuación, se muestran los gráficos comparativos para cada genoma analizado:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">long_data_target</span> <span class="op">&lt;-</span> <span class="va">classfied_amino_acids_targt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Genome</span>, <span class="va">id</span><span class="op">)</span>,  <span class="co"># Excluir columnas que no se quieren transformar</span></span>
-<span>    names_to <span class="op">=</span> <span class="st">"AminoAcidGroup"</span>,</span>
-<span>    values_to <span class="op">=</span> <span class="st">"Freq"</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">classification_aminoacids</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">genome_col</span> <span class="op">=</span> <span class="st">"File"</span>, <span class="va">id_col</span> <span class="op">=</span> <span class="st">"Sequence_ID"</span>, <span class="va">type</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">result_combained_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Genome"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span> <span class="va">genome_col</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    <span class="st">"id"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span> <span class="va">id_col</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    <span class="st">"Aliphatic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"A"</span>, <span class="st">"V"</span>, <span class="st">"L"</span>, <span class="st">"I"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Aromatic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"W"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Sulphur"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Basic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"R"</span>, <span class="st">"H"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Acidic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"Q"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,  <span class="co"># nota: N y Q a veces no se incluyen como ácidos</span></span>
+<span>    <span class="st">"Polar_Uncharged"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"N"</span>, <span class="st">"Q"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,  <span class="co"># Polar pero sin carga</span></span>
+<span>    <span class="st">"AliphaticHydroxyl"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"T"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Positive_Charge"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"R"</span>, <span class="st">"H"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,  <span class="co"># Lisina, Arginina, Histidina</span></span>
+<span>    <span class="st">"Negative_Charge"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,       <span class="co"># Aspartato, Glutamato</span></span>
+<span>    <span class="co"># "tRNAsynthetaseClassI" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),</span></span>
+<span>    <span class="co"># "tRNAsynthetaseClassII" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")]),</span></span>
+<span>    <span class="st">"Hydrophobic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"V"</span>, <span class="st">"I"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"W"</span>, <span class="st">"G"</span>, <span class="st">"P"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Hydrophilic"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"N"</span>, <span class="st">"D"</span>, <span class="st">"Q"</span>, <span class="st">"E"</span>, <span class="st">"K"</span>, <span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"Y"</span>, <span class="st">"H"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">long_data_coding_prot</span> <span class="op">&lt;-</span> <span class="va">classfied_amino_acids_coding_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Genome</span>, <span class="va">id</span><span class="op">)</span>,  <span class="co"># Excluir columnas que no se quieren transformar</span></span>
-<span>    names_to <span class="op">=</span> <span class="st">"AminoAcidGroup"</span>,</span>
-<span>    values_to <span class="op">=</span> <span class="st">"Freq"</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">summary_data_class_target</span> <span class="op">&lt;-</span> <span class="va">long_data_target</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genome</span>, <span class="va">AminoAcidGroup</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>    mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    <span class="co"># supp = supp,</span></span>
-<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">summary_data_class_coding_prot</span> <span class="op">&lt;-</span> <span class="va">long_data_coding_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genome</span>, <span class="va">AminoAcidGroup</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>    mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span>,</span>
-<span>    <span class="co"># supp = supp,</span></span>
-<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">plot_barplot_contrast_group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">plot_title</span>, <span class="va">y_label</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">dodge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>  <span class="co"># Definimos un dodge para ambas capas</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">AminoAcidGroup</span>, y <span class="op">=</span> <span class="va">mean_freq</span>, fill <span class="op">=</span> <span class="va">supp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span></span>
-<span>      stat <span class="op">=</span> <span class="st">"identity"</span>, </span>
-<span>      alpha <span class="op">=</span> <span class="fl">0.7</span>, </span>
-<span>      width <span class="op">=</span> <span class="fl">0.5</span>, </span>
-<span>      position <span class="op">=</span> <span class="va">dodge</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>        ymin <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">-</span> <span class="va">sd_freq</span>,</span>
-<span>        ymax <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">+</span> <span class="va">sd_freq</span></span>
-<span>      <span class="op">)</span>,</span>
-<span>      width <span class="op">=</span> <span class="fl">0.25</span>, </span>
-<span>      colour <span class="op">=</span> <span class="st">"orange"</span>, </span>
-<span>      alpha <span class="op">=</span> <span class="fl">0.8</span>, </span>
-<span>      size <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>      position <span class="op">=</span> <span class="va">dodge</span>  <span class="co"># Aplicamos el mismo dodge para alinear las barras de error</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="co"># scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_freq</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>      vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, </span>
-<span>      size <span class="op">=</span> <span class="fl">3</span>, </span>
-<span>      position <span class="op">=</span> <span class="va">dodge</span>  <span class="co"># Alineamos también las etiquetas</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="va">y_label</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="va">plot_title</span>,  </span>
-<span>      caption <span class="op">=</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>      axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>      axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result_combained_data</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">summary_data_class_target</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">key_name</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">summary_data_class_target</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">summary_data_class_coding_prot</span><span class="op">$</span><span class="va">supp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"rest"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">summary_data_class_coding_prot</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># 1. Calcular clasificación por grupo químico de aminoácidos</span></span>
+<span><span class="va">classfied_amino_acids_targt</span> <span class="op">&lt;-</span> <span class="fu">classification_aminoacids</span><span class="op">(</span><span class="va">all_frequencies_target</span><span class="op">)</span></span>
+<span><span class="va">classfied_amino_acids_coding_prot</span> <span class="op">&lt;-</span> <span class="fu">classification_aminoacids</span><span class="op">(</span><span class="va">combined_freqs_coding_prot</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">target_coding_seq_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">summary_data_class_target</span>, <span class="va">summary_data_class_coding_prot</span><span class="op">)</span></span>
+<span><span class="co"># Agregamos una columna de origen a cada conjunto</span></span>
+<span><span class="va">classfied_amino_acids_targt</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="va">key_name</span></span>
+<span><span class="va">classfied_amino_acids_coding_prot</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="st">"Other"</span></span>
 <span></span>
-<span><span class="va">unique_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">target_coding_seq_group</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span></span>
+<span><span class="co"># Unimos los datasets</span></span>
+<span><span class="va">combined_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">classfied_amino_acids_targt</span>, <span class="va">classfied_amino_acids_coding_prot</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">file_name</span> <span class="kw">in</span> <span class="va">unique_files</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">target_coding_seq_group</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">file_name</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">plot_barplot_contrast_group</span><span class="op">(</span></span>
-<span>    <span class="va">data_subset</span>,</span>
-<span>    plot_title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Amino acid frequency -"</span>, <span class="va">file_name</span><span class="op">)</span>, </span>
-<span>    y_label <span class="op">=</span> <span class="st">"Amino acid content"</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co"># readline(prompt = "Press Enter to see the next plot...")</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># 2. Columnas de interés</span></span>
+<span><span class="co"># Seleccionamos solo las columnas numéricas de los grupos</span></span>
+<span><span class="va">group_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Aliphatic"</span>, <span class="st">"Aromatic"</span>, <span class="st">"Sulphur"</span>, <span class="st">"Basic"</span>, <span class="st">"Acidic"</span>, <span class="st">"Polar_Uncharged"</span>, <span class="st">"Positive_Charge"</span>, <span class="st">"Negative_Charge"</span>, <span class="st">"AliphaticHydroxyl"</span>, <span class="st">"Hydrophobic"</span>, <span class="st">"Hydrophilic"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3. Convertir a formato largo</span></span>
+<span><span class="va">long_data</span> <span class="op">&lt;-</span> <span class="va">combined_groups</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">group_columns</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"AminoAcidGroup"</span>, values_to <span class="op">=</span> <span class="st">"Frequency"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4. Calcular medias y SD por genoma y grupo</span></span>
+<span><span class="va">summary_data_by_genome</span> <span class="op">&lt;-</span> <span class="va">long_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genome</span>, <span class="va">group</span>, <span class="va">AminoAcidGroup</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    mean_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Frequency</span><span class="op">)</span>,</span>
+<span>    sd_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Frequency</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
+<span><span class="co"># 5. Paleta de colores</span></span>
+<span><span class="va">group_levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">summary_data_by_genome</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span>
+<span><span class="va">palette_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">group_levels</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span>, <span class="va">group_levels</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
+<pre><code>Warning in brewer.pal(n = length(group_levels), name = "Set1"): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
 </div>
-<div class="cell-output-display">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 6. Hacer un gráfico por genoma</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">summary_data_by_genome</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">summary_data_by_genome</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">genome</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># p &lt;- ggplot(data_subset, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +</span></span>
+<span>  <span class="co">#   geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +</span></span>
+<span>  <span class="co">#   geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),</span></span>
+<span>  <span class="co">#                 position = position_dodge(width = 0.9), width = 0.3) +</span></span>
+<span>  <span class="co">#   scale_fill_manual(values = palette_colors) +</span></span>
+<span>  <span class="co">#   labs(</span></span>
+<span>  <span class="co">#     title = paste("Amino Acid Group Composition -", genome),</span></span>
+<span>  <span class="co">#     x = "Amino Acid Group",</span></span>
+<span>  <span class="co">#     y = "Mean Frequency ± SD"</span></span>
+<span>  <span class="co">#   ) +</span></span>
+<span>  <span class="co">#   theme_minimal() +</span></span>
+<span>  <span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span>
+<span></span>
+<span>  <span class="co"># print(p)</span></span>
+<span>    <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data_subset</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">AminoAcidGroup</span>, y <span class="op">=</span> <span class="va">mean_freq</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">-</span> <span class="va">sd_freq</span>, ymax <span class="op">=</span> <span class="va">mean_freq</span> <span class="op">+</span> <span class="va">sd_freq</span><span class="op">)</span>,</span>
+<span>                  position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_freq</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,  <span class="co"># redondea a 2 decimales</span></span>
+<span>      position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>      vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>,</span>
+<span>      size <span class="op">=</span> <span class="fl">3</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">palette_colors</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>      title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Amino Acid Group Composition -"</span>, <span class="va">genome</span><span class="op">)</span>,</span>
+<span>      x <span class="op">=</span> <span class="st">"Amino Acid Group"</span>,</span>
+<span>      y <span class="op">=</span> <span class="st">"Mean Frequency ± SD"</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/classification amino acids-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/classification amino acids-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/classification amino acids-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-6.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-7.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/Created function to barplot contrast group-8.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="aminoAcidFreq_files/figure-html/classification amino acids-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

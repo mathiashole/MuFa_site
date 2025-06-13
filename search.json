@@ -196,5 +196,16 @@
       "Análisis Básico",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Amino acid frequency</span>"
     ]
+  },
+  {
+    "objectID": "proteinStructure.html",
+    "href": "proteinStructure.html",
+    "title": "5  🧬 Visualización interactiva",
+    "section": "",
+    "text": "Modelo\n    \n      Modelo 0\n      Modelo 1\n      Modelo 2\n      Modelo 3\n      Modelo 4\n    \n  \n\n  \n    Color\n    \n      Cadenas\n      Elemento\n      Residuo\n      Índice\n      Uniforme\n      Estructura Secundaria (Helix/Sheet/Loop)\n      Hidrofobicidad\n      B-factor (Flexibilidad)\n      Espectro (Rainbow)\n      Tipo de Hélice (α/β/π)\n      Por Modelo (NMR/Multi-model)\n      Carga Parcial\n    \n  \n\n  \n    Visualización\n    \n      Cartoon\n      Surface\n      Ball+Stick\n      Spacefill\n      Licorice\n      Trace\n      Tube\n      Backbone\n      Contact Points\n      Helix Orientation\n      Hyperball\n      Line\n      Points\n    \n  \n\n  \n    📸 Capturar\n  \n  \n  \n    🖥️ Pant. completa\n  \n  \n  \n    🎥 Perspectiva\n  \n  \n  \n    🔄 Rotación: OFF",
+    "crumbs": [
+      "Análisis Básico",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>🧬 Visualización interactiva</span>"
+    ]
   }
 ]

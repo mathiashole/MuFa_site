@@ -188,110 +188,34 @@ ul.task-list li input[type="checkbox"] {
 
 
 <style>
-  .viewer-controls {
-    margin-bottom: 1.5em;
-    padding: 1em;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* Estilos para los botones toggle de representaciones */
+  .rep-toggle-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .control-group {
-    display: flex;
-    align-items: center;
     gap: 0.5em;
-    background: white;
-    padding: 0.5em 1em;
+  }
+  .rep-toggle-button {
+    padding: 0.4em 0.9em;
+    background: #e9ecef;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9em;
-  }
-  
-  select {
-    padding: 0.5em 1em;
     border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: white;
-    font-size: 0.9em;
-    transition: all 0.2s;
-  }
-  
-  select:hover {
-    border-color: #adb5bd;
-  }
-  
-  select:focus {
-    outline: none;
-    border-color: #4dabf7;
-    box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.2);
-  }
-  
-  button {
-    padding: 0.6em 1.2em;
-    border: none;
-    border-radius: 4px;
-    background-color: #4dabf7;
-    color: white;
-    font-weight: 500;
-    font-size: 0.9em;
     cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+    user-select: none;
+    font-size: 0.9em;
+    color: #495057;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
   }
-  
-  button:hover {
-    background-color: #339af0;
-    transform: translateY(-1px);
-  }
-  
-  button:active {
-    transform: translateY(0);
-  }
-  
-  #autoSpinBtn {
-    background-color: #868e96;
-  }
-  
-  #autoSpinBtn.active {
-    background-color: #40c057;
-  }
-  
-  #viewport {
-    width: 100%;
-    height: 600px;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    background: #f1f3f5;
-  }
-  
-  @media (max-width: 768px) {
-    .viewer-controls {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    
-    .control-group {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .rep-toggle-button.active {
+    background: #4dabf7;
+    border-color: #339af0;
+    color: white;
   }
   
 </style>
 
 <div class="viewer-controls">
+
+  <!-- Select for models -->
   <div class="control-group">
     <label for="model-select">Modelo</label>
     <select id="model-select" class="styled-select">
@@ -303,6 +227,7 @@ ul.task-list li input[type="checkbox"] {
     </select>
   </div>
 
+  <!-- Select for colors -->
   <div class="control-group">
     <label for="color-select">Color</label>
     <select id="color-select" class="styled-select">
@@ -321,23 +246,24 @@ ul.task-list li input[type="checkbox"] {
     </select>
   </div>
 
-  <div class="control-group">
-    <label for="rep-select">Visualización</label>
-    <select id="rep-select" class="styled-select">
-      <option value="cartoon" selected="">Cartoon</option>
-      <option value="surface">Surface</option>
-      <option value="ball+stick">Ball+Stick</option>
-      <option value="spacefill">Spacefill</option>
-      <option value="licorice">Licorice</option>
-      <option value="trace">Trace</option>
-      <option value="tube">Tube</option>
-      <option value="backbone">Backbone</option>
-      <option value="contact">Contact Points</option>
-      <option value="helixorient">Helix Orientation</option>
-      <option value="hyperball">Hyperball</option>
-      <option value="line">Line</option>
-      <option value="point">Points</option>
-    </select>
+  <!-- Botones toggle para visualización múltiple -->
+  <div class="control-group" style="flex-direction: column; align-items: flex-start;">
+    <label>Visualización (puedes seleccionar varias):</label>
+    <div id="rep-toggle-group" class="rep-toggle-group">
+      <div class="rep-toggle-button active" data-rep="cartoon">Cartoon</div>
+      <div class="rep-toggle-button" data-rep="surface">Surface</div>
+      <div class="rep-toggle-button" data-rep="ball+stick">Ball+Stick</div>
+      <div class="rep-toggle-button" data-rep="spacefill">Spacefill</div>
+      <div class="rep-toggle-button" data-rep="licorice">Licorice</div>
+      <div class="rep-toggle-button" data-rep="trace">Trace</div>
+      <div class="rep-toggle-button" data-rep="tube">Tube</div>
+      <div class="rep-toggle-button" data-rep="backbone">Backbone</div>
+      <div class="rep-toggle-button" data-rep="contact">Contact Points</div>
+      <div class="rep-toggle-button" data-rep="helixorient">Helix Orientation</div>
+      <div class="rep-toggle-button" data-rep="hyperball">Hyperball</div>
+      <div class="rep-toggle-button" data-rep="line">Line</div>
+      <div class="rep-toggle-button" data-rep="point">Points</div>
+    </div>
   </div>
 
   <button onclick="descargarImagen()">

@@ -266,6 +266,54 @@ ul.task-list li input[type="checkbox"] {
     </div>
   </div>
 
+  <!-- Selección por rango de residuos -->
+<div class="control-group">
+  <label for="range-select">Seleccionar rango (ej. 10-40)</label>
+  <input type="text" id="range-select" placeholder="10-40" class="styled-select">
+</div>
+
+<!-- Selección por tipo de aminoácido -->
+<div class="control-group">
+  <label for="residue-select">Seleccionar residuos (ej. CYS,ALA)</label>
+  <input type="text" id="residue-select" placeholder="CYS,ALA" class="styled-select">
+</div>
+
+<!-- Estilo para selección -->
+<div class="control-group">
+  <label for="highlight-color">Color para selección</label>
+  <select id="highlight-color" class="styled-select">
+    <option value="red">Rojo</option>
+    <option value="green">Verde</option>
+    <option value="blue">Azul</option>
+    <option value="yellow">Amarillo</option>
+    <option value="magenta">Magenta</option>
+    <option value="cyan">Cian</option>
+    <option value="resname">Residuo</option>
+  </select>
+</div>
+
+<div class="control-group">
+  <label for="highlight-style">Visualizacion para selección</label>
+  <select id="highlight-style" class="styled-select">
+     <option value="surface">Surface</option>
+     <option value="ball+stick">Ball+Stick</option>
+     <option value="spacefill">Spacefill</option>
+     <option value="licorice">Licorice</option>
+     <option value="trace">Trace</option>
+     <option value="tube">Tube</option>
+     <option value="backbone">Backbone</option>
+     <option value="contact">Contact Points</option>
+     <option value="helixorient">Helix Orientation</option>
+     <option value="hyperball">Hyperball</option>
+     <option value="line">Line</option>
+     <option value="point">Points</option>
+  </select>
+</div>
+
+
+<button onclick="resaltarSeleccion()">🔍 Resaltar selección</button>
+<button onclick="limpiarSeleccion()">🧹 Limpiar selección</button>
+
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
   </button>

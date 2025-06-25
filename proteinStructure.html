@@ -331,6 +331,25 @@ ul.task-list li input[type="checkbox"] {
   </button>
 </div>
 
+<!-- Select for alignment -->
+<div class="control-group">
+  <label for="align-select">Modelo para alinear</label>
+  <select id="align-select" class="styled-select">
+    <option value="">-- Seleccionar --</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
+  </select>
+</div>
+
+<button onclick="alinearEstructuras()">🔄 Alinear Estructuras</button>
+<button onclick="limpiarAlineamiento()">🧹 Limpiar Alineamiento</button>
+
+<div class="control-group" style="margin-top:1em;">
+  <label>🧫 Membrana simulada</label>
+  <button onclick="toggleMembrane()">🔁 Activar / Desactivar</button>
+
 <div id="viewport"></div>
 
 <!-- <style>
@@ -458,7 +477,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -352,62 +352,15 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="viewport"></div>
 
-<!-- <style>
-  .viewer-controls {
-    margin-bottom: 1em;
-    text-align: center;
-  }
-  .viewer-controls > * {
-    margin: 0 1em 1em 1em;
-  }
-  /* Opcional: para que el contenedor de viewport tenga borde sutil */
-  #viewport {
-    border: 1px solid #ccc;
-  }
-</style>
-
-<div class="viewer-controls">
-  <label for="model-select">Modelo:</label>
-  <select id="model-select">
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_4.cif" selected>Modelo 4</option>
-  </select>
-
-  <label for="color-select"> 🎨 Color:</label>
-  <select id="color-select">
-    <option value="chainid" selected>Cadenas</option>
-    <option value="element">Elemento</option>
-    <option value="resname">Nombre de residuo</option>
-    <option value="residueindex">Índice de residuo</option>
-    <option value="uniform">Uniforme</option>
-  </select>
-
-  <label for="rep-select"> 🧱 Representación:</label>
-  <select id="rep-select">
-    <option value="cartoon" selected>Cartoon</option>
-    <option value="surface">Surface</option>
-    <option value="ball+stick">Ball + Stick</option>
-    <option value="spacefill">Spacefill</option>
-    <option value="licorice">Licorice</option>
-  </select>
-
-  <button onclick="descargarImagen()">📸 Imagen</button>
-  <button onclick="pantallaCompleta()">🖥️ Pantalla completa</button>
-  <button onclick="cambiarPerspectiva()">🎥 Perspectiva</button>
-  <button id="autoSpinBtn" onclick="toggleAutoSpin()">🔄 Auto-rotación: OFF</button>
-</div>
-
-<div id="viewport" style="width: 100%; height: 500px; border: 1px solid #ccc;"></div> -->
-
 <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
 <script>
   let stage = new NGL.Stage("viewport", { backgroundColor: "white" });
   let currentComponent;
   let currentPerspective = "perspective";
-  let autoSpin = false;  // Estado inicial: auto rotación apagada
+  let autoSpin = false;
+
+  // Representaciones activas: cartoon activo por defecto
+  let activeReps = new Set(["cartoon"]);
 
   function cargarModelo(file) {
     stage.removeAllComponents();

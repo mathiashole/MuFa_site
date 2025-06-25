@@ -441,6 +441,59 @@ ul.task-list li input[type="checkbox"] {
     stage.setParameters({ cameraType: currentPerspective });
   }
 
+ function resaltarSeleccion() {
+  if (!currentComponent) return;
+
+  const rango = document.getElementById("range-select").value.trim();
+  const residuos = document.getElementById("residue-select").value.trim();
+  const color = document.getElementById("highlight-color").value;
+  const style = document.getElementById("highlight-style").value;
+  
+  let seleccion = [];
+
+  if (rango.match(/^\d+\s*-\s*\d+$/)) {
+    const [start, end] = rango.split("-").map(v => v.trim());
+    seleccion.push(`${start}-${end}`);
+  }
+
+  if (residuos.length > 0) {
+    const residuosClean = residuos.split(",").map(r => r.trim().toUpperCase()).filter(r => r.length === 3);
+    if (residuosClean.length > 0) {
+      const resList = residuosClean.join(" ");
+      seleccion.push(`:resname ${resList}`);
+    } else {
+      alert("Ingrese residuos válidos (3 letras cada uno, separados por coma). Ej: CYS,ALA");
+      return;
+    }
+  }
+
+  const selString = seleccion.join(" and ");
+
+  if (selString) {
+    currentComponent.addRepresentation(style, {
+      sele: selString,
+      color: color,
+      opacity: 1.0
+    });
+  }
+}
+
+function limpiarSeleccion() {
+  if (!currentComponent) return;
+
+  // Eliminamos todas las representaciones para empezar limpio
+  currentComponent.removeAllRepresentations();
+
+  // Volvemos a agregar solo la representación base, por ejemplo cartoon gris
+  currentComponent.addRepresentation("cartoon", {
+    color: "chainid",
+    opacity: 1
+  });
+
+  // Actualizamos la vista
+  currentComponent.autoView();
+}
+
   // Cargar modelo inicial
   cargarModelo(document.getElementById("model-select").value);
 </script>

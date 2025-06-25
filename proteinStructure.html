@@ -414,6 +414,17 @@ ul.task-list li input[type="checkbox"] {
     actualizarBotonAutoSpin();
   }
 
+  function actualizarBotonAutoSpin() {
+    const btn = document.getElementById("autoSpinBtn");
+    btn.textContent = autoSpin ? "🔄 Auto-rotación: ON" : "🔄 Auto-rotación: OFF";
+  }
+
+  function descargarImagen() {
+    stage.makeImage({ factor: 2 }).then(blob => {
+      NGL.download(blob, "estructura.png");
+    });
+  }
+
   function pantallaCompleta() {
     const elem = document.getElementById("viewport");
     if (elem.requestFullscreen) {

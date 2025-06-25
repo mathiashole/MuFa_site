@@ -384,17 +384,24 @@ ul.task-list li input[type="checkbox"] {
     });
     currentComponent.autoView();
   }
-  
-  function toggleAutoSpin() {
-    autoSpin = !autoSpin;
-    stage.setSpin(autoSpin);
-    actualizarBotonAutoSpin();
-  }
+ 
+  // Cambiar color: actualiza todas las representaciones
+  document.getElementById("color-select").addEventListener("change", actualizarRepresentaciones);
 
-  function actualizarBotonAutoSpin() {
-    const btn = document.getElementById("autoSpinBtn");
-    btn.textContent = autoSpin ? "🔄 Auto-rotación: ON" : "🔄 Auto-rotación: OFF";
-  }
+  // Manejar clics en botones toggle de representaciones
+  document.getElementById("rep-toggle-group").addEventListener("click", e => {
+    if (!e.target.classList.contains("rep-toggle-button")) return;
+    const rep = e.target.getAttribute("data-rep");
+    if (activeReps.has(rep)) {
+      activeReps.delete(rep);
+      e.target.classList.remove("active");
+    } else {
+      activeReps.add(rep);
+      e.target.classList.add("active");
+    }
+    actualizarRepresentaciones();
+  });
+
 
   document.getElementById("model-select").addEventListener("change", function () {
     cargarModelo(this.value);

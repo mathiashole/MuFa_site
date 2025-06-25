@@ -215,7 +215,6 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="viewer-controls">
 
-  <!-- Select for models -->
   <div class="control-group">
     <label for="model-select">Modelo</label>
     <select id="model-select" class="styled-select">
@@ -265,6 +264,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="rep-toggle-button" data-rep="point">Points</div>
     </div>
   </div>
+  
 
   <!-- Selección por rango de residuos -->
 <div class="control-group">
@@ -350,7 +350,7 @@ ul.task-list li input[type="checkbox"] {
   <label>🧫 Membrana simulada</label>
   <button onclick="toggleMembrane()">🔁 Activar / Desactivar</button>
 
-<div id="viewport"></div>
+<div id="viewport" style="width: 100%; height: 600px;"></div>
 
 <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
 <script>
